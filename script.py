@@ -18,3 +18,5 @@ pygame.init()
 pygame.display.set_caption('Michael Waterfall Snake Game')
 gameWindow = pygame.display.set_mode((windowX, windowY))
 
+fps = pygame.time.Clock()
+
