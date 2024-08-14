@@ -20,3 +20,11 @@ gameWindow = pygame.display.set_mode((windowX, windowY))
 
 fps = pygame.time.Clock()
 
+snakePosition = [100, 50]
+
+snakeBody = [ 
+                [100, 50],
+                [90, 50],
+                [80, 50],
+                [70, 50]
+            ]
