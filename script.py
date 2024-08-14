@@ -28,3 +28,9 @@ snakeBody = [
                 [80, 50],
                 [70, 50]
             ]
+
+prizePosition = [random.randrange(1, (windowX//10)) * 10,
+                  random.randrange(1, (windowY//10)) * 10]
+
+prizeSpawn = True
+
