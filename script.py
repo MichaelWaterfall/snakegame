@@ -39,3 +39,8 @@ changeTo = direction
 
 score = 0
 
+def showScore(choice, color, font, size):
+    scoreFront = pygame.font.SysFont(font, size)
+    scoreSurface = scoreFront.render('Score: ' + str(score), True, color)
+    ScoreRect = scoreSurface.get_rect()
+    gameWindow.blit(scoreSurface, ScoreRect)
