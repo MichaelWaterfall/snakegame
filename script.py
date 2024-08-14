@@ -44,3 +44,16 @@ def showScore(choice, color, font, size):
     scoreSurface = scoreFront.render('Score: ' + str(score), True, color)
     ScoreRect = scoreSurface.get_rect()
     gameWindow.blit(scoreSurface, ScoreRect)
+
+def gameOver():
+    myFont = pygame.font.SysFont('times new roman', 50)
+    gameOverSurface = myFont.render('Your score is : ' + str(score), True, red)
+
+    gameOverRect = gameOverSurface.get_rect()
+    gameOverRect.midtop = (windowX/2, windowY/4)
+    gameWindow.blit(gameOverSurface, gameOverRect)
+    pygame.display.flip()
+    time.sleep(2)
+    pygame.quit()
+    quit()
+
