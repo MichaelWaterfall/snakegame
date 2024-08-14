@@ -34,3 +34,5 @@ prizePosition = [random.randrange(1, (windowX//10)) * 10,
 
 prizeSpawn = True
 
+direction = 'RIGHT'
+changeTo = direction
