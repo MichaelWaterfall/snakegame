@@ -18,6 +18,7 @@ pygame.init()
 # Music/Sound
 music = pygame.mixer.music.load('./Audio/snakeGameMusic.mp3')
 pygame.mixer.music.play(-1)
+prizeSound = pygame.mixer.Sound('./Audio/prizeWon.mp3')
 
 pygame.display.set_caption('Michael Waterfall Snake Game')
 gameWindow = pygame.display.set_mode((windowX, windowY))
@@ -93,6 +94,7 @@ while True:
 
     snakeBody.insert(0, list(snakePosition))
     if snakePosition[0] == prizePosition[0] and snakePosition[1] == prizePosition[1]:
+        prizeSound.play()
         score += 10
         prizeSpawn = False
     else:
