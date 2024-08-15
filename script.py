@@ -15,6 +15,10 @@ blue = pygame.Color(0, 0, 255)
 
 pygame.init()
 
+# Music/Sound
+music = pygame.mixer.music.load('./Audio/snakeGameMusic.mp3')
+pygame.mixer.music.play(-1)
+
 pygame.display.set_caption('Michael Waterfall Snake Game')
 gameWindow = pygame.display.set_mode((windowX, windowY))
 
