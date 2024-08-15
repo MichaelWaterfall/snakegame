@@ -50,6 +50,9 @@ def showScore(choice, color, font, size):
     scoreRect = scoreSurface.get_rect()
     gameWindow.blit(scoreSurface, scoreRect)
 
+def restartGame():
+    
+
 def gameOver():
     myFont = pygame.font.SysFont('times new roman', 50)
     gameOverSurface = myFont.render('Your score is : ' + str(score), True, red)
