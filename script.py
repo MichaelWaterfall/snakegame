@@ -38,11 +38,12 @@ prizePosition = [random.randrange(1, (windowX//10)) * 10,
                   random.randrange(1, (windowY//10)) * 10]
 
 prizeSpawn = True
-
+print(prizeSpawn)
 direction = 'RIGHT'
 changeTo = direction
 
 score = 0
+print(score)
 
 def showScore(choice, color, font, size):
     scoreFront = pygame.font.SysFont(font, size)
@@ -53,7 +54,9 @@ def showScore(choice, color, font, size):
 def restartGame():
     print("restarted")
     score == 0
-    prizeSpawn == True
+    showScore(1, white, 'times new roman', 20)
+    #prizeSpawn == True
+    pygame.display.update()
 
 def gameOver():
     myFont = pygame.font.SysFont('times new roman', 50)
@@ -75,6 +78,7 @@ def gameOver():
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_r:
+                prizeSpawn == False
                 print("r key pressed")
                 restartGame()
     #prizeSpawn == True
