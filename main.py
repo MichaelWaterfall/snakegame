@@ -150,3 +150,6 @@ async def main():
         pygame.display.update()
 
         fps.tick(snakeSpeed)
+        await asyncio.sleep(0)
+
+asyncio.run(main())
