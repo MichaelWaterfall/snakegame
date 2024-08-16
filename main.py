@@ -62,16 +62,16 @@ def gameOver():
     myFont = pygame.font.SysFont('times new roman', 50)
     gameOverSurface = myFont.render('Your score is : ' + str(score), True, red)
     restartFont = pygame.font.SysFont('times new roman', 25)
-    gameOverRestart = restartFont.render('Press the R key to restart the game', True, red)
+    #gameOverRestart = restartFont.render('Press the R key to restart the game', True, red)
     
     gameOverRect = gameOverSurface.get_rect()
-    gameOverRestartRect = gameOverRestart.get_rect()
+    #gameOverRestartRect = gameOverRestart.get_rect()
 
     gameOverRect.midtop = (windowX/2, windowY/4)
-    gameOverRestartRect.midtop = (windowX/2, windowY/2.7)
+    #gameOverRestartRect.midtop = (windowX/2, windowY/2.7)
 
     gameWindow.blit(gameOverSurface, gameOverRect)
-    gameWindow.blit(gameOverRestart, gameOverRestartRect)
+    #gameWindow.blit(gameOverRestart, gameOverRestartRect)
     pygame.display.flip()
     #time.sleep()
     #print("test")
