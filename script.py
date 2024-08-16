@@ -51,7 +51,9 @@ def showScore(choice, color, font, size):
     gameWindow.blit(scoreSurface, scoreRect)
 
 def restartGame():
-    
+    print("restarted")
+    score == 0
+    prizeSpawn == True
 
 def gameOver():
     myFont = pygame.font.SysFont('times new roman', 50)
@@ -68,10 +70,12 @@ def gameOver():
     gameWindow.blit(gameOverSurface, gameOverRect)
     gameWindow.blit(gameOverRestart, gameOverRestartRect)
     pygame.display.flip()
-    time.sleep(5)
+    #time.sleep()
+    #print("test")
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_r:
+                print("r key pressed")
                 restartGame()
     #prizeSpawn == True
     #pygame.quit()
