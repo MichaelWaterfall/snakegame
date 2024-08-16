@@ -1,6 +1,4 @@
-import pygame
-import time
-import random
+import pygame, time, random, asyncio
 
 snakeSpeed = 15
 
