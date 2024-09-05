@@ -1,4 +1,4 @@
-import pygame, time, random, asyncio
+import pygame, time, random
 
 snakeSpeed = 15
 
@@ -25,131 +25,136 @@ fps = pygame.time.Clock()
 
 snakePosition = [100, 50]
 
-snakeBody = [ 
-                [100, 50],
-                [90, 50],
-                [80, 50],
-                [70, 50]
-            ]
-
-prizePosition = [random.randrange(1, (windowX//10)) * 10,
+# Defining first 4 blocks of snake body
+snakeBody = [[100, 50],
+              [90, 50],
+              [80, 50],
+              [70, 50]
+              ]
+# Prize position
+prizePosition = [random.randrange(1, (windowX//10)) * 10, 
                   random.randrange(1, (windowY//10)) * 10]
 
 prizeSpawn = True
-print(prizeSpawn)
+
+# Setting default snake direction towards
+# Right
 direction = 'RIGHT'
 changeTo = direction
 
 score = 0
-print(score)
 
 def showScore(choice, color, font, size):
-    scoreFront = pygame.font.SysFont(font, size)
-    scoreSurface = scoreFront.render('Score: ' + str(score), True, color)
+  
+    scoreFont = pygame.font.SysFont(font, size)
+    
+    scoreSurface = scoreFont.render('Score : ' + str(score), True, color)
+    
+    # create a rectangular object for the text
+    # surface object
     scoreRect = scoreSurface.get_rect()
+    
+    # displaying text
     gameWindow.blit(scoreSurface, scoreRect)
 
-def restartGame():
-    print("restarted")
-    score == 0
-    showScore(1, white, 'times new roman', 20)
-    #prizeSpawn == True
-    pygame.display.update()
-
+# game over function
 def gameOver():
+  
+    # creating font object myFont
     myFont = pygame.font.SysFont('times new roman', 50)
-    gameOverSurface = myFont.render('Your score is : ' + str(score), True, red)
-    restartFont = pygame.font.SysFont('times new roman', 25)
-    #gameOverRestart = restartFont.render('Press the R key to restart the game', True, red)
     
-    gameOverRect = gameOverSurface.get_rect()
-    #gameOverRestartRect = gameOverRestart.get_rect()
-
+    # creating a text surface on which text 
+    # will be drawn
+    getOverSurface = myFont.render(
+        'Your Score is : ' + str(score), True, red)
+    
+    # create a rectangular object for the text 
+    # surface object
+    gameOverRect = getOverSurface.get_rect()
+    
+    # setting position of the text
     gameOverRect.midtop = (windowX/2, windowY/4)
-    #gameOverRestartRect.midtop = (windowX/2, windowY/2.7)
-
-    gameWindow.blit(gameOverSurface, gameOverRect)
-    #gameWindow.blit(gameOverRestart, gameOverRestartRect)
+    
+    # blit will draw the text on screen
+    gameWindow.blit(getOverSurface, gameOverRect)
     pygame.display.flip()
-    #time.sleep()
-    #print("test")
+    
+    # after 2 seconds we will quit the program
+    time.sleep(2)
+    
+    # deactivating pygame library
+    pygame.quit()
+    
+    # quit the program
+    quit()
+
+
+# Main Function
+while True:
+    
+    # handling key events
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_r:
-                prizeSpawn == False
-                print("r key pressed")
-                restartGame()
-    #prizeSpawn == True
-    #pygame.quit()
-    #quit()
+            if event.key == pygame.K_UP:
+                changeTo = 'UP'
+            if event.key == pygame.K_DOWN:
+                changeTo = 'DOWN'
+            if event.key == pygame.K_LEFT:
+                changeTo = 'LEFT'
+            if event.key == pygame.K_RIGHT:
+                changeTo = 'RIGHT'
 
-async def main():
-    while True:
-        for event in pygame.event.get():
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_UP:
-                    changeTo = 'UP'
-                if event.key == pygame.K_DOWN:
-                    changeTo = 'DOWN'
-                if event.key == pygame.K_LEFT:
-                    changeTo = 'LEFT'
-                if event.key == pygame.K_RIGHT:
-                    changeTo = 'RIGHT'
+    if changeTo == 'UP' and direction != 'DOWN':
+        direction = 'UP'
+    if changeTo == 'DOWN' and direction != 'UP':
+        direction = 'DOWN'
+    if changeTo == 'LEFT' and direction != 'RIGHT':
+        direction = 'LEFT'
+    if changeTo == 'RIGHT' and direction != 'LEFT':
+        direction = 'RIGHT'
 
-        if changeTo == 'UP' and direction != 'DOWN':
-            direction = 'UP'
-        if changeTo == 'DOWN' and direction != 'UP':
-            direction = 'DOWN'
-        if changeTo == 'LEFT' and direction != 'RIGHT':
-            direction = 'LEFT'
-        if changeTo == 'RIGHT' and direction != 'LEFT':
-            direction = 'RIGHT'
+    # Moving the snake
+    if direction == 'UP':
+        snakePosition[1] -= 10
+    if direction == 'DOWN':
+        snakePosition[1] += 10
+    if direction == 'LEFT':
+        snakePosition[0] -= 10
+    if direction == 'RIGHT':
+        snakePosition[0] += 10
 
-        if direction == 'UP':
-            snakePosition[1] -= 10
-        if direction == 'DOWN':
-            snakePosition[1] += 10
-        if direction == 'LEFT':
-            snakePosition[0] -= 10
-        if direction == 'RIGHT':
-            snakePosition[0] += 10
-
-        snakeBody.insert(0, list(snakePosition))
-        if snakePosition[0] == prizePosition[0] and snakePosition[1] == prizePosition[1]:
-            prizeSound.play()
-            score += 10
-            prizeSpawn = False
-        else:
-            snakeBody.pop()
-            
-        if not prizeSpawn:
-            prizePosition = [random.randrange(1, (windowX//10)) * 10, 
-                            random.randrange(1, (windowY//10)) * 10]
-            
-        prizeSpawn = True
-        gameWindow.fill(black)
+    snakeBody.insert(0, list(snakePosition))
+    if snakePosition[0] == prizePosition[0] and snakePosition[1] == prizePosition[1]:
+        pygame.mixer.Sound.play(prizeSound)
+        score += 10
+        prizeSpawn = False
+    else:
+        snakeBody.pop()
         
-        for pos in snakeBody:
-            pygame.draw.rect(gameWindow, green, pygame.Rect(
-            pos[0], pos[1], 10, 10))
-            
-        pygame.draw.rect(gameWindow, white, pygame.Rect(
+    if not prizeSpawn:
+        prizePosition = [random.randrange(1, (windowX//10)) * 10, 
+                          random.randrange(1, (windowY//10)) * 10]
+        
+    prizeSpawn = True
+    gameWindow.fill(black)
+    
+    for pos in snakeBody:
+        pygame.draw.rect(gameWindow, green,
+                         pygame.Rect(pos[0], pos[1], 10, 10))
+    pygame.draw.rect(gameWindow, white, pygame.Rect(
         prizePosition[0], prizePosition[1], 10, 10))
 
-        if snakePosition[0] < 0 or snakePosition[0] > windowX-10:
-            gameOver()
-        if snakePosition[1] < 0 or snakePosition[1] > windowY-10:
-            gameOver()
-        
-        for block in snakeBody[1:]:
-            if snakePosition[0] == block[0] and snakePosition[1] == block[1]:
-                gameOver()
-        
-        showScore(1, white, 'times new roman', 20)
-        
-        pygame.display.update()
+    if snakePosition[0] < 0 or snakePosition[0] > windowX-10:
+        gameOver()
+    if snakePosition[1] < 0 or snakePosition[1] > windowY-10:
+        gameOver()
 
-        fps.tick(snakeSpeed)
-        await asyncio.sleep(0)
+    for block in snakeBody[1:]:
+        if snakePosition[0] == block[0] and snakePosition[1] == block[1]:
+            gameOver()
 
-asyncio.run(main())
+    showScore(1, white, 'times new roman', 20)
+
+    pygame.display.update()
+
+    fps.tick(snakeSpeed)
